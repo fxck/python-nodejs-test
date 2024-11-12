@@ -14,7 +14,7 @@ zerops:
       # check if nodejs and python are installed
       initCommands:
         - node -v
-        - python3 -v
+        - python3 --version
       start: python3 app.py
       ports:
         - port: 8000
