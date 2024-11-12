@@ -2,25 +2,19 @@ zerops:
   - setup: api
     build:
       base: python@3.12
+      buildCommands:
+        - python3 -m pip install --target ./vendor -r requirements.txt
       deploy:
         - app.py
-      addToRunPrepare:
-        - requirements.txt
+        - vendor/
     run:
-      os: ubuntu
-      base: nodejs@20
-      prepareCommands:
-        - zsc install python@3.12
-        - python3 -m pip install --ignore-installed -r requirements.txt
-      # check if nodejs and python are installed
-      initCommands:
-        - node -v
-        - python3 --version
+      base: python@3.12
       start: python3 app.py
       ports:
         - port: 8000
           httpSupport: true
       envVariables:
+        PYTHONPATH: /var/www/vendor
         DB_NAME: db
         DB_HOST: ${db_hostname}
         DB_PORT: ${db_port}
