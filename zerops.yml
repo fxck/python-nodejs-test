@@ -11,6 +11,10 @@ zerops:
       prepareCommands:
         - zsc install python@3.12
         - python3 -m pip install --ignore-installed -r requirements.txt
+      # check if nodejs and python are installed
+      initCommands:
+        - node -v
+        - python3 -v
       start: python3 app.py
       ports:
         - port: 8000
